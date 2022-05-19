@@ -11,7 +11,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css"/>
   </head>
   <body>
     <header>
@@ -24,13 +24,26 @@
       </nav>
     </header>
     <div class="container-fluid">
-  <div class="row">
-    <div class="col-4">
+  <div class="row d-flex flex-column flex-sm-row">
+    <div class="col-sm-4">
         <h2>Search for a City:</h2>
+        <input class="col-sm-8" type="text" id="citySearch">
+        <button id="searchBtn" class="btn btn-sm btn-danger">Search</button>
     </div>
-    <div class="col-8">
-        <h2>Wea</h2>
+    <div class="col-sm-8" id="forecastbox">
+        <h2>Weather Forecast</h2>
+        <div class="container-fluid mh-50 float-end" id="currbox">
+            <h2 id="locntime"></h2>
+            <ul id="currCond">
+                <li id="currTemp"></li>
+                <li id="currWind"></li>
+                <li id="currHum"></li>
+                <li id="currUV"></li>
+            </ul>
+        </div>
+        <div id="daycards" class="d-sm-inline-flex mh-50"></div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
