@@ -4,6 +4,7 @@ Weather Dashboard
 To Do:
   -Change styling for better aesthetics
   -Fine-tune UV warning
+  -Save search history in local storage
 
 Changelog: 
 -Ver 0.9.0
