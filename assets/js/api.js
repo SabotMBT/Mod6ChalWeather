@@ -1,10 +1,12 @@
 var urlstart = "http://api.weatherapi.com/v1/";
 var key = "key=55371cca9f7d49c5a27220811221805";
-var search = "q=search";
+var search = "Denver";
 var aqi = "aqi=no";
 var alert = "alerts=no";
 var forecast = "forecast.json?";
 var currSearch = "";
+var shList = [];
+
 var wsettings = {
   async: true,
   crossDomain: true,
@@ -12,11 +14,34 @@ var wsettings = {
   method: "GET",
 };
 
-function APIsearch() {
+function trackCities() {
+  $("#shCont").empty();
   search = $("#citySearch").val();
-  var dup = $("#" + search);
-  dup.remove();
+  if (localStorage.getItem("cityList") !== null) {
+    shList = JSON.parse(localStorage.getItem("cityList"));
+  }
+  shList.unshift(search);
+  var shSet = new Set(shList);
+  shList = [...shSet];
+  console.log(shList);
+  if (shList.length > 10) {
+    shList.pop();
+  }
   console.log(search);
+  localStorage.setItem("cityList", JSON.stringify(shList));
+  for (i = 0; i < shList.length; i++) {
+    var searchHistory = $("<div>");
+    searchHistory.addClass(
+      "col-8 rounded border-2 border-dark bg-success bg-opacity-25 p-2 my-2"
+    );
+    searchHistory.attr("id", shList[i]);
+    searchHistory.text(shList[i]);
+    $("#shCont").append(searchHistory);
+  }
+}
+
+function APIsearch() {
+  trackCities();
   wsettings.url =
     urlstart +
     forecast +
@@ -31,13 +56,6 @@ function APIsearch() {
   $.ajax(wsettings).done(function (response) {
     console.log(response);
     currSearch = response;
-    var searchHistory = $("<div>");
-    searchHistory.addClass(
-      "col-8 rounded border-2 border-dark bg-success bg-opacity-25 p-2 my-2"
-    );
-    searchHistory.attr("id", search);
-    searchHistory.text(search);
-    $("div.col-sm-4").append(searchHistory);
     locweather();
     weatherforecast();
   });
@@ -91,6 +109,16 @@ function weatherforecast() {
     cardbody.append(cardHum);
   }
 }
+
+$(document).ready(function () {
+  if (localStorage.getItem("cityList") !== null) {
+    $("#citySearch").val(shList[0]);
+  } else {
+    $("#citySearch").val("Denver");
+  }
+  trackCities();
+  APIsearch();
+});
 
 $("#searchBtn").on("click", APIsearch);
 $("div.col-sm-4").delegate("div.rounded", "click", function () {
