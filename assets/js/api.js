@@ -77,7 +77,7 @@ function weatherforecast() {
     var cardWind = $('<p class="card-text">');
     var cardHum = $('<p class="card-text">');
     cardTitle.text(currSearch.forecast.forecastday[i].date);
-    var icon = "http:" + currSearch.forecast.forecastday[i].day.condition.icon;
+    var icon = "https:" + currSearch.forecast.forecastday[i].day.condition.icon;
     cardIcon.attr("src", icon);
     cardTemp.text(
       currSearch.forecast.forecastday[i].day.avgtemp_f + "\u00B0" + "F"
