@@ -1,4 +1,4 @@
-var urlstart = "http://api.weatherapi.com/v1/";
+var urlstart = "https://api.weatherapi.com/v1/";
 var key = "key=55371cca9f7d49c5a27220811221805";
 var search = "q=search";
 var aqi = "aqi=no";
